@@ -1,0 +1,14 @@
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\bin\Debug\net6.0\HospitalManagementSystem.exe
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\bin\Debug\net6.0\HospitalManagementSystem.deps.json
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\bin\Debug\net6.0\HospitalManagementSystem.runtimeconfig.json
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\bin\Debug\net6.0\HospitalManagementSystem.dll
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\bin\Debug\net6.0\HospitalManagementSystem.pdb
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\obj\Debug\net6.0\HospitalManagementSystem.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\obj\Debug\net6.0\HospitalManagementSystem.AssemblyInfoInputs.cache
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\obj\Debug\net6.0\HospitalManagementSystem.AssemblyInfo.cs
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\obj\Debug\net6.0\HospitalManagementSystem.csproj.CoreCompileInputs.cache
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\obj\Debug\net6.0\HospitalManagementSystem.dll
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\obj\Debug\net6.0\refint\HospitalManagementSystem.dll
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\obj\Debug\net6.0\HospitalManagementSystem.pdb
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\obj\Debug\net6.0\HospitalManagementSystem.genruntimeconfig.cache
+C:\Users\natha\Downloads\uts-dotnet-assignment-1\HospitalManagementSystem\HospitalManagementSystem\obj\Debug\net6.0\ref\HospitalManagementSystem.dll
