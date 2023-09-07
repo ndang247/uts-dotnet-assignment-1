@@ -1,14 +1,14 @@
 ﻿using System;
-
+using System.IO;
 
 namespace HospitalManagementSystem
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main()
         {
-            Console.WriteLine("Hello World!");
-            Console.ReadKey();
+            Login login = new Login();
+            login.LoginMenu();
         }
     }
 }
