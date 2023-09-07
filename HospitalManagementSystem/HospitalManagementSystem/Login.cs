@@ -12,12 +12,13 @@ namespace HospitalManagementSystem
 
         public void LoginMenu()
         {
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |                LOGIN                 |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|                LOGIN                 |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine();
 
             Console.Write("ID: ");
             id = Console.ReadLine();
@@ -57,7 +58,6 @@ namespace HospitalManagementSystem
             Console.WriteLine();
             return password;
         }
-
 
         private void HandleLogin()
         {
@@ -120,7 +120,7 @@ namespace HospitalManagementSystem
             // Check if the id and password is correct
             if (id == details[0] && password == details[1])
             {
-                Console.WriteLine("Valid Credentials");
+                Console.WriteLine("\nValid Credentials");
                 Console.ReadKey();
 
                 switch (role)
@@ -133,26 +133,17 @@ namespace HospitalManagementSystem
                         Doctor doctor = new Doctor(details[0], details[1], details[2], details[3], details[4], details[5], "Doctor");
                         doctor.Menu();
                         break;
-                    //case "Administrators":
-                    //    Administrator administrator = new Administrator(details[0], details[1], details[2], details[3], details[4], details[5]);
-                    //    string[] options3 =
-                    //    {
-                    //        "1. List administrator details",
-                    //        "2. List all doctors",
-                    //        "3. List all patients",
-                    //        "4. List all appointments",
-                    //        "5. Exit to login",
-                    //        "6. Exit System"
-                    //    };
-                    //    administrator.Menu(options3);
-                    //    break;
+                    case "Administrators":
+                        Admin administrator = new Admin(details[0], details[1], details[2], "Admin");
+                        administrator.Menu();
+                        break;
                     default:
                         break;
                 }
             }
             else
             {
-                throw new Exception("Invalid password, press any key to try again");
+                throw new Exception("\nInvalid password, press any key to try again");
             }
         }
     }

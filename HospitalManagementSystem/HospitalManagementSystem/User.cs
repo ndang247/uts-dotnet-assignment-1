@@ -8,17 +8,14 @@ namespace HospitalManagementSystem
 {
     public abstract class User
     {
-        public string id, password, fullName, address, email, phone, role;
+        public string id, password, fullName, role;
         public string[] options = Array.Empty<string>();
 
-        public User(string id, string password, string fullName, string address, string email, string phone, string role)
+        public User(string id, string password, string fullName, string role)
         {
             this.id = id;
             this.password = password;
             this.fullName = fullName;
-            this.address = address;
-            this.email = email;
-            this.phone = phone;
             this.role = role;
 
             switch (role)

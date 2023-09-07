@@ -9,19 +9,24 @@ namespace HospitalManagementSystem
 {
     public class Patient : User
     {
-        public Patient(string id, string password, string fullName, string address, string email, string phone, string role) : base(id, password, fullName, address, email, phone, role)
+        private string address, email, phone;
+        public Patient(string id, string password, string fullName, string address, string email, string phone, string role) : base(id, password, fullName, role)
         {
+            this.address = address;
+            this.email = email;
+            this.phone = phone;
         }
 
         private void MyDetails()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |               My Details             |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|               My Details             |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine();
             Console.WriteLine($"{fullName}'s Details");
             Console.WriteLine();
             Console.WriteLine($"Patient ID: {id}\nFull Name: {fullName}\nAddress: {address}\nEmail: {email}\nPhone: {phone}");
@@ -32,12 +37,12 @@ namespace HospitalManagementSystem
         private void MyDoctor()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |               My Doctor              |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|               My Doctor              |");
+            Console.WriteLine("|______________________________________|");
             Console.WriteLine();
             Console.WriteLine("Your doctor:");
             Console.WriteLine();
@@ -60,12 +65,13 @@ namespace HospitalManagementSystem
         private void MyAppointment()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |             My Appointment           |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|            My Appointment            |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine();
             Console.WriteLine($"Appointment for {fullName}");
             Console.WriteLine();
             Console.WriteLine("Doctor | Patient | Description");
@@ -87,12 +93,12 @@ namespace HospitalManagementSystem
         private void BookAppointment()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |           Book Appointment           |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|           Book Appointment           |");
+            Console.WriteLine("|______________________________________|");
 
             Booking();
 
@@ -111,6 +117,7 @@ namespace HospitalManagementSystem
                 string[] doctor = File.ReadAllLines($"Doctors\\{line[0]}.txt");
                 string[] doctorInfo = doctor[0].Split(';');
 
+                Console.WriteLine();
                 Console.WriteLine($"You are booking a new appointment with {doctorInfo[2]}");
                 Console.Write("Description of the appointment: ");
                 string description = Console.ReadLine();
@@ -185,15 +192,17 @@ namespace HospitalManagementSystem
         public override void Menu()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |              Patient Menu            |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|             Patient Menu             |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine();
 
             Console.WriteLine($"Welcome to DOTNET Hospital Managment System {fullName}");
-
+            Console.WriteLine();
+            Console.WriteLine("Please choose an option:");
             foreach (string option in options)
             {
                 Console.WriteLine(option);
@@ -206,36 +215,41 @@ namespace HospitalManagementSystem
                 switch (info.Key)
                 {
                     case ConsoleKey.D1:
+                    case ConsoleKey.NumPad1:
                         MyDetails();
                         break;
                     case ConsoleKey.D2:
+                    case ConsoleKey.NumPad2:
                         MyDoctor();
                         break;
                     case ConsoleKey.D3:
+                    case ConsoleKey.NumPad3:
                         MyAppointment();
                         break;
                     case ConsoleKey.D4:
+                    case ConsoleKey.NumPad4:
                         BookAppointment();
                         break;
                     case ConsoleKey.D5:
+                    case ConsoleKey.NumPad5:
                         Console.Clear();
                         Program.Main();
                         break;
                     case ConsoleKey.D6:
+                    case ConsoleKey.NumPad6:
                         Environment.Exit(0);
                         break;
                     default:
-                        Console.WriteLine($"Invalid option, please choose from 1-{options.Length}");
-                        Console.ReadKey();
-                        Menu();
-                        break;
+                        throw new Exception($"Invalid option, please choose from 1-{options.Length}");
                 }
             }
             catch (Exception e)
             {
+                Console.WriteLine();
                 Console.WriteLine(e.Message);
+                Console.ReadKey();
+                Menu();
             }
-            Console.ReadKey();
         }
 
         public override string ToString()
