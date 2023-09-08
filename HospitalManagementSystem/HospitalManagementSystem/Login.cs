@@ -120,7 +120,7 @@ namespace HospitalManagementSystem
             // Check if the id and password is correct
             if (id == details[0] && password == details[1])
             {
-                Console.WriteLine("\nValid Credentials");
+                Console.WriteLine("Valid Credentials");
                 Console.ReadKey();
 
                 switch (role)

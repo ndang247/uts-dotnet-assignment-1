@@ -50,12 +50,13 @@ namespace HospitalManagementSystem
             Console.WriteLine("--------------------------------------");
             if (File.Exists($"Patients\\RegisteredDoctors\\{id}.txt"))
             {
-                string[] lines = File.ReadAllLines($"Patients\\RegisteredDoctors\\{id}.txt");
-                foreach (string line in lines)
+                string[] registeredDoctors = File.ReadAllLines($"Patients\\RegisteredDoctors\\{id}.txt");
+                foreach (string registeredDoctor in registeredDoctors)
                 {
-                    string[] registeredDoctor = File.ReadAllLines($"Doctors\\{line}.txt");
-                    string[] doctorInfo = registeredDoctor[0].Split(';');
-                    Console.WriteLine($"{doctorInfo[2]} | {doctorInfo[4]} | {doctorInfo[5]} | {doctorInfo[3]}");
+                    string[] doctor = File.ReadAllLines($"Doctors\\{registeredDoctor}.txt");
+                    string[] doctorInfo = doctor[0].Split(';');
+                    Doctor d = new Doctor(doctorInfo[0], doctorInfo[1], doctorInfo[2], doctorInfo[3], doctorInfo[4], doctorInfo[5], "Doctor");
+                    Console.WriteLine(d);
                 }
             }
             Console.ReadKey();

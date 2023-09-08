@@ -9,7 +9,6 @@ namespace HospitalManagementSystem
     public class Appointment
     {
         private string doctorID, patientID, description;
-
         public Appointment(string doctorID, string patientID, string description)
         {
             this.doctorID = doctorID;

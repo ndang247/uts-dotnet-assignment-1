@@ -15,12 +15,12 @@ namespace HospitalManagementSystem
         private void ListAllDoctors()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |              All Doctors             |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|              All Doctors             |");
+            Console.WriteLine("|______________________________________|");
             Console.WriteLine();
 
             Console.WriteLine("All doctors registered to the DOTNET Hospital Management System");
@@ -47,12 +47,12 @@ namespace HospitalManagementSystem
         private void CheckDoctorDetails()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |            Doctor Details            |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|            Doctor Details            |");
+            Console.WriteLine("|______________________________________|");
             Console.WriteLine();
 
             Console.WriteLine("Please enter the ID of the doctor who's details you are checking. Or press n to return to menu");
@@ -117,12 +117,12 @@ namespace HospitalManagementSystem
         private void ListAllPatients()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |             All Patients             |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|             All Patients             |");
+            Console.WriteLine("|______________________________________|");
             Console.WriteLine();
 
             Console.WriteLine("All patients registered to the DOTNET Hospital Management System");
@@ -150,12 +150,12 @@ namespace HospitalManagementSystem
         private void CheckPatientDetails()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |            Patient Details           |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|            Patient Details           |");
+            Console.WriteLine("|______________________________________|");
             Console.WriteLine();
 
             Console.WriteLine("Please enter the ID of the patient who's details you are checking. Or press n to return to menu");
@@ -219,23 +219,231 @@ namespace HospitalManagementSystem
 
         private void AddDoctor()
         {
+            Console.Clear();
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|              Add Doctor              |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine();
 
+            Console.WriteLine("Registering a new doctor with the DOTNET Hospital Management System");
+            Console.WriteLine();
+
+            try
+            {
+                Console.Write("First Name: ");
+                string firstName = Console.ReadLine();
+
+                Console.Write("Last Name: ");
+                string lastName = Console.ReadLine();
+
+                Console.Write("Email: ");
+                string emailAddress = Console.ReadLine();
+
+                Console.Write("Phone: ");
+                string phoneNumber = Console.ReadLine();
+
+                Console.Write("Street Number: ");
+                string streetNumber = Console.ReadLine();
+
+                Console.Write("Street: ");
+                string street = Console.ReadLine();
+
+                Console.Write("City: ");
+                string city = Console.ReadLine();
+
+                Console.Write("State: ");
+                string state = Console.ReadLine();
+
+                Console.Write("Postcode: ");
+                string postcode = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(firstName) ||
+                    string.IsNullOrEmpty(lastName) ||
+                    string.IsNullOrEmpty(emailAddress) ||
+                    string.IsNullOrEmpty(phoneNumber) ||
+                    string.IsNullOrEmpty(streetNumber) ||
+                    string.IsNullOrEmpty(street) ||
+                    string.IsNullOrEmpty(city) ||
+                    string.IsNullOrEmpty(state) ||
+                    string.IsNullOrEmpty(postcode))
+                {
+                    throw new Exception("Please enter all fields, press any key to return to menu");
+                }
+
+                // Random generate 5 digit ID and set default password
+                Random rnd = new Random();
+                int id = rnd.Next(10000, 99999);
+                while (File.Exists($"Doctors\\{id}.txt"))
+                {
+                    id = rnd.Next(10000, 99999);
+                }
+                string password = "password";
+
+                string data = $"{id};{password};{firstName} {lastName};{streetNumber} {street}, {city} {state} {postcode};{emailAddress};{phoneNumber}";
+
+                // Create a doctor file
+                File.WriteAllText($"Doctors\\{id}.txt", data);
+
+                if (File.Exists($"Doctors\\{id}.txt"))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"{firstName} {lastName} added to the system!");
+                }
+                else
+                {
+                    throw new Exception("Error adding doctor, press any key to return to menu");
+                }
+
+                Console.ReadKey();
+                Menu();
+            }
+            catch (Exception e)
+            {
+                switch (e.Message)
+                {
+                    case "Please enter all fields, press any key to return to menu":
+                        Console.WriteLine();
+                        Console.WriteLine(e.Message);
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                    case "Error adding doctor, press any key to return to menu":
+                        Console.WriteLine();
+                        Console.WriteLine(e.Message);
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                    default:
+                        Console.WriteLine();
+                        Console.WriteLine(e.Message);
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                }
+            }
         }
 
         private void AddPatient()
         {
+            Console.Clear();
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|              Add Patient             |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine();
 
+            Console.WriteLine("Registering a new patient with the DOTNET Hospital Management System");
+            Console.WriteLine();
+
+            try
+            {
+                Console.Write("First Name: ");
+                string firstName = Console.ReadLine();
+
+                Console.Write("Last Name: ");
+                string lastName = Console.ReadLine();
+
+                Console.Write("Email: ");
+                string emailAddress = Console.ReadLine();
+
+                Console.Write("Phone: ");
+                string phoneNumber = Console.ReadLine();
+
+                Console.Write("Street Number: ");
+                string streetNumber = Console.ReadLine();
+
+                Console.Write("Street: ");
+                string street = Console.ReadLine();
+
+                Console.Write("City: ");
+                string city = Console.ReadLine();
+
+                Console.Write("State: ");
+                string state = Console.ReadLine();
+
+                Console.Write("Postcode: ");
+                string postcode = Console.ReadLine();
+
+                if (string.IsNullOrEmpty(firstName) ||
+                    string.IsNullOrEmpty(lastName) ||
+                    string.IsNullOrEmpty(emailAddress) ||
+                    string.IsNullOrEmpty(phoneNumber) ||
+                    string.IsNullOrEmpty(streetNumber) ||
+                    string.IsNullOrEmpty(street) ||
+                    string.IsNullOrEmpty(city) ||
+                    string.IsNullOrEmpty(state) ||
+                    string.IsNullOrEmpty(postcode))
+                {
+                    throw new Exception("Please enter all fields, press any key to return to menu");
+                }
+
+                // Random generate 5 digit ID and set default password
+                Random rnd = new Random();
+                int id = rnd.Next(10000, 99999);
+                while (File.Exists($"Patients\\{id}.txt"))
+                {
+                    id = rnd.Next(10000, 99999);
+                }
+                string password = "password";
+
+                string data = $"{id};{password};{firstName} {lastName};{streetNumber} {street}, {city} {state} {postcode};{emailAddress};{phoneNumber}";
+
+                // Create a patient file
+                File.WriteAllText($"Patients\\{id}.txt", data);
+
+                if (File.Exists($"Patients\\{id}.txt"))
+                {
+                    Console.WriteLine();
+                    Console.WriteLine($"{firstName} {lastName} added to the system!");
+                }
+                else
+                {
+                    throw new Exception("Error adding patient, press any key to return to menu");
+                }
+
+                Console.ReadKey();
+                Menu();
+            }
+            catch (Exception e)
+            {
+                switch (e.Message)
+                {
+                    case "Please enter all fields, press any key to return to menu":
+                        Console.WriteLine();
+                        Console.WriteLine(e.Message);
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                    case "Error adding patient, press any key to return to menu":
+                        Console.WriteLine();
+                        Console.WriteLine(e.Message);
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                    default:
+                        Console.WriteLine();
+                        Console.WriteLine(e.Message);
+                        Console.ReadKey();
+                        Menu();
+                        break;
+                }
+            }
         }
 
         public override void Menu()
         {
             Console.Clear();
-            Console.WriteLine("  ______________________________________");
-            Console.WriteLine(" |                                      |");
-            Console.WriteLine(" |   DOTNET Hospital Managment System   |");
-            Console.WriteLine(" |______________________________________|");
-            Console.WriteLine(" |          Administrator Menu          |");
-            Console.WriteLine(" |______________________________________|");
+            Console.WriteLine(" ______________________________________");
+            Console.WriteLine("|                                      |");
+            Console.WriteLine("|   DOTNET Hospital Managment System   |");
+            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("|          Administrator Menu          |");
+            Console.WriteLine("|______________________________________|");
 
             Console.WriteLine();
             Console.WriteLine($"Welcome to DOTNET Hospital Managment System {fullName}");
