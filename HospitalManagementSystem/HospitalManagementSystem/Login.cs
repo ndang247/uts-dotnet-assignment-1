@@ -27,7 +27,7 @@ namespace HospitalManagementSystem
             HandleLogin();
         }
 
-        private string MaskPassword()
+        public static string MaskPassword()
         {
             string password = "";
 

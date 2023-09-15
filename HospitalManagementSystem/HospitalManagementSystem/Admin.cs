@@ -138,7 +138,7 @@ namespace HospitalManagementSystem
                 {
                     string[] patientInfo = File.ReadAllLines(patient);
                     string[] patientDetails = patientInfo[0].Split(';');
-                    Patient p = new Patient(patientDetails[0], patientDetails[1], patientDetails[2], patientDetails[3], patientDetails[4], patientDetails[5], "Doctor");
+                    Patient p = new Patient(patientDetails[0], patientDetails[1], patientDetails[2], patientDetails[3], patientDetails[4], patientDetails[5], "Patient");
                     Console.WriteLine(p);
                 }
             }
@@ -233,6 +233,9 @@ namespace HospitalManagementSystem
 
             try
             {
+                Console.Write("Password: ");
+                string password = Login.MaskPassword();
+
                 Console.Write("First Name: ");
                 string firstName = Console.ReadLine();
 
@@ -260,7 +263,8 @@ namespace HospitalManagementSystem
                 Console.Write("Postcode: ");
                 string postcode = Console.ReadLine();
 
-                if (string.IsNullOrEmpty(firstName) ||
+                if (string.IsNullOrEmpty(password) ||
+                    string.IsNullOrEmpty(firstName) ||
                     string.IsNullOrEmpty(lastName) ||
                     string.IsNullOrEmpty(emailAddress) ||
                     string.IsNullOrEmpty(phoneNumber) ||
@@ -280,7 +284,6 @@ namespace HospitalManagementSystem
                 {
                     id = rnd.Next(10000, 99999);
                 }
-                string password = "password";
 
                 string data = $"{id};{password};{firstName} {lastName};{streetNumber} {street}, {city} {state} {postcode};{emailAddress};{phoneNumber}";
 
@@ -342,6 +345,9 @@ namespace HospitalManagementSystem
 
             try
             {
+                Console.Write("Password: ");
+                string password = Login.MaskPassword();
+
                 Console.Write("First Name: ");
                 string firstName = Console.ReadLine();
 
@@ -382,19 +388,32 @@ namespace HospitalManagementSystem
                     throw new Exception("Please enter all fields, press any key to return to menu");
                 }
 
-                // Random generate 5 digit ID and set default password
+                // Random generate 5 digit ID
                 Random rnd = new Random();
                 int id = rnd.Next(10000, 99999);
                 while (File.Exists($"Patients\\{id}.txt"))
                 {
                     id = rnd.Next(10000, 99999);
                 }
-                string password = "password";
 
                 string data = $"{id};{password};{firstName} {lastName};{streetNumber} {street}, {city} {state} {postcode};{emailAddress};{phoneNumber}";
 
                 // Create a patient file
                 File.WriteAllText($"Patients\\{id}.txt", data);
+
+                // Assign patient to a default doctor
+                string[] defaultDoctor = File.ReadAllLines("Doctors\\13587.txt");
+                string[] defaultDoctorDetails = defaultDoctor[0].Split(';');
+
+                // Add the default doctor ID to the RegisteredDoctors
+                File.WriteAllText($"Patients\\RegisteredDoctors\\{id}.txt", $"{defaultDoctorDetails[0]}");
+
+                // Also add the patient ID to the RegisteredPatients
+                if (File.Exists($"Doctors\\RegisteredPatients\\{defaultDoctorDetails[0]}.txt"))
+                {
+                    File.AppendAllText($"Doctors\\RegisteredPatients\\{defaultDoctorDetails[0]}.txt", $"\n{id}");
+                }
+                else File.WriteAllText($"Doctors\\RegisteredPatients\\{defaultDoctorDetails[0]}.txt", $"{id}");
 
                 if (File.Exists($"Patients\\{id}.txt"))
                 {
