@@ -329,7 +329,7 @@ namespace HospitalManagementSystem
             }
         }
 
-        private void AddPatient()
+        private void AddPatient(string pID, string password, string firstName, string lastName, string emailAddress, string phoneNumber, string streetNumber, string street, string city, string state, string postcode)
         {
             Console.Clear();
             Console.WriteLine(" ______________________________________");
@@ -345,35 +345,35 @@ namespace HospitalManagementSystem
 
             try
             {
-                Console.Write("Password: ");
-                string password = Login.MaskPassword();
+                Console.Write("Password: " + (!string.IsNullOrEmpty(password) ? password + "\n" : ""));
+                password = !string.IsNullOrEmpty(password) ? password : Login.MaskPassword();
 
-                Console.Write("First Name: ");
-                string firstName = Console.ReadLine();
+                Console.Write("First Name: " + (!string.IsNullOrEmpty(firstName) ? firstName + "\n" : ""));
+                firstName = !string.IsNullOrEmpty(firstName) ? firstName : Console.ReadLine();
 
-                Console.Write("Last Name: ");
-                string lastName = Console.ReadLine();
+                Console.Write("Last Name: " + (!string.IsNullOrEmpty(lastName) ? lastName + "\n" : ""));
+                lastName = !string.IsNullOrEmpty(lastName) ? lastName : Console.ReadLine();
 
-                Console.Write("Email: ");
-                string emailAddress = Console.ReadLine();
+                Console.Write("Email: " + (!string.IsNullOrEmpty(emailAddress) ? emailAddress + "\n" : ""));
+                emailAddress = !string.IsNullOrEmpty(emailAddress) ? emailAddress : Console.ReadLine();
 
-                Console.Write("Phone: ");
-                string phoneNumber = Console.ReadLine();
+                Console.Write("Phone: " + (!string.IsNullOrEmpty(phoneNumber) ? phoneNumber + "\n" : ""));
+                phoneNumber = !string.IsNullOrEmpty(phoneNumber) ? phoneNumber : Console.ReadLine();
 
-                Console.Write("Street Number: ");
-                string streetNumber = Console.ReadLine();
+                Console.Write("Street Number: " + (!string.IsNullOrEmpty(streetNumber) ? streetNumber + "\n" : ""));
+                streetNumber = !string.IsNullOrEmpty(streetNumber) ? streetNumber : Console.ReadLine();
 
-                Console.Write("Street: ");
-                string street = Console.ReadLine();
+                Console.Write("Street: " + (!string.IsNullOrEmpty(street) ? street + "\n" : ""));
+                street = !string.IsNullOrEmpty(street) ? street : Console.ReadLine();
 
-                Console.Write("City: ");
-                string city = Console.ReadLine();
+                Console.Write("City: " + (!string.IsNullOrEmpty(city) ? city + "\n" : ""));
+                city = !string.IsNullOrEmpty(city) ? city : Console.ReadLine();
 
-                Console.Write("State: ");
-                string state = Console.ReadLine();
+                Console.Write("State: " + (!string.IsNullOrEmpty(state) ? state + "\n" : ""));
+                state = !string.IsNullOrEmpty(state) ? state : Console.ReadLine();
 
-                Console.Write("Postcode: ");
-                string postcode = Console.ReadLine();
+                Console.Write("Postcode: " + (!string.IsNullOrEmpty(postcode) ? postcode + "\n" : ""));
+                postcode = !string.IsNullOrEmpty(postcode) ? postcode : Console.ReadLine();
 
                 if (string.IsNullOrEmpty(firstName) ||
                     string.IsNullOrEmpty(lastName) ||
@@ -388,35 +388,41 @@ namespace HospitalManagementSystem
                     throw new Exception("Please enter all fields, press any key to return to menu");
                 }
 
-                // Random generate 5 digit ID
-                Random rnd = new Random();
-                int id = rnd.Next(10000, 99999);
-                while (File.Exists($"Patients\\{id}.txt"))
+                if (!File.Exists($"Patients\\{pID}.txt"))
                 {
-                    id = rnd.Next(10000, 99999);
+                    // Random generate 5 digit ID
+                    Random rnd = new Random();
+                    int id = rnd.Next(10000, 99999);
+                    while (File.Exists($"Patients\\{id}.txt"))
+                    {
+                        id = rnd.Next(10000, 99999);
+                    }
+                    pID = id.ToString();
+
+                    string data = $"{id};{password};{firstName} {lastName};{streetNumber} {street}, {city} {state} {postcode};{emailAddress};{phoneNumber}";
+
+                    // Create a patient file
+                    File.WriteAllText($"Patients\\{id}.txt", data);
                 }
 
-                string data = $"{id};{password};{firstName} {lastName};{streetNumber} {street}, {city} {state} {postcode};{emailAddress};{phoneNumber}";
 
-                // Create a patient file
-                File.WriteAllText($"Patients\\{id}.txt", data);
-
-                // Assign patient to a default doctor
-                string[] defaultDoctor = File.ReadAllLines("Doctors\\13587.txt");
-                string[] defaultDoctorDetails = defaultDoctor[0].Split(';');
-
-                // Add the default doctor ID to the RegisteredDoctors
-                File.WriteAllText($"Patients\\RegisteredDoctors\\{id}.txt", $"{defaultDoctorDetails[0]}");
-
-                // Also add the patient ID to the RegisteredPatients
-                if (File.Exists($"Doctors\\RegisteredPatients\\{defaultDoctorDetails[0]}.txt"))
+                if (File.Exists($"Patients\\{pID}.txt"))
                 {
-                    File.AppendAllText($"Doctors\\RegisteredPatients\\{defaultDoctorDetails[0]}.txt", $"\n{id}");
-                }
-                else File.WriteAllText($"Doctors\\RegisteredPatients\\{defaultDoctorDetails[0]}.txt", $"{id}");
+                    Patient patient = new Patient(pID.ToString(), password, $"{firstName} {lastName}", $"{streetNumber} {street}, {city} {state} {postcode}", emailAddress, phoneNumber, "Patient");
 
-                if (File.Exists($"Patients\\{id}.txt"))
-                {
+                    // Book an appointment with a doctor
+                    try
+                    {
+                        patient.Booking("Patient");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine();
+                        Console.WriteLine(e.Message);
+                        Console.ReadKey();
+                        AddPatient(pID.ToString(), password, firstName, lastName, emailAddress, phoneNumber, streetNumber, street, city, state, postcode);
+                    }
+
                     Console.WriteLine();
                     Console.WriteLine($"{firstName} {lastName} added to the system!");
                 }
@@ -430,27 +436,10 @@ namespace HospitalManagementSystem
             }
             catch (Exception e)
             {
-                switch (e.Message)
-                {
-                    case "Please enter all fields, press any key to return to menu":
-                        Console.WriteLine();
-                        Console.WriteLine(e.Message);
-                        Console.ReadKey();
-                        Menu();
-                        break;
-                    case "Error adding patient, press any key to return to menu":
-                        Console.WriteLine();
-                        Console.WriteLine(e.Message);
-                        Console.ReadKey();
-                        Menu();
-                        break;
-                    default:
-                        Console.WriteLine();
-                        Console.WriteLine(e.Message);
-                        Console.ReadKey();
-                        Menu();
-                        break;
-                }
+                Console.WriteLine();
+                Console.WriteLine(e.Message);
+                Console.ReadKey();
+                Menu();
             }
         }
 
@@ -501,7 +490,7 @@ namespace HospitalManagementSystem
                         break;
                     case ConsoleKey.D6:
                     case ConsoleKey.NumPad6:
-                        AddPatient();
+                        AddPatient("", "", "", "", "", "", "", "", "", "", "");
                         break;
                     case ConsoleKey.D7:
                     case ConsoleKey.NumPad7:

@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-
-namespace HospitalManagementSystem
+﻿namespace HospitalManagementSystem
 {
     public class Doctor : User
     {
@@ -185,7 +176,12 @@ namespace HospitalManagementSystem
                     }
                     else
                     {
-                        throw new Exception("Patient not registered with you, press any key to return to menu");
+                        // throw new Exception("Patient not registered with you, press any key to return to menu");
+                        Console.WriteLine();
+                        Console.WriteLine("Doctor | Patient | Description");
+                        Console.WriteLine("------------------------------");
+                        Console.ReadKey();
+                        Menu();
                     }
                 }
                 else

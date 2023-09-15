@@ -101,13 +101,13 @@ namespace HospitalManagementSystem
             Console.WriteLine("|           Book Appointment           |");
             Console.WriteLine("|______________________________________|");
 
-            Booking();
+            Booking("You");
 
             Console.ReadKey();
             Menu();
         }
 
-        private void Booking()
+        public void Booking(string placeholder)
         {
             if (File.Exists($"Patients\\RegisteredDoctors\\{id}.txt"))
             {
@@ -150,7 +150,8 @@ namespace HospitalManagementSystem
             }
             else
             {
-                Console.WriteLine("You are not registered with any doctor! Please choose which doctor you would like to register with");
+                Console.WriteLine();
+                Console.WriteLine($"{placeholder} are not registered with any doctor! Please choose which doctor you would like to register with");
                 // Read all the files in doctors
                 string[] files = Directory.GetFiles("Doctors");
                 for (int i = 0; i < files.Length; i++)
@@ -179,13 +180,21 @@ namespace HospitalManagementSystem
                         File.AppendAllText($"Doctors\\RegisteredPatients\\{doctorInfo[0]}.txt", $"\n{id}");
                     }
                     else File.WriteAllText($"Doctors\\RegisteredPatients\\{doctorInfo[0]}.txt", $"{id}");
-                    Booking();
+                    Booking("You");
                 }
-                catch (Exception e)
+                catch
                 {
-                    Console.WriteLine($"Invalid choice {e.Message} Press any key to try again");
-                    Console.ReadKey();
-                    BookAppointment();
+                    switch (placeholder)
+                    {
+                        case "Patient":
+                            throw new Exception($"Invalid choice, press any key to try again");
+                        case "You":
+                            Console.WriteLine();
+                            Console.WriteLine($"Invalid choice, press any key to try again");
+                            Console.ReadKey();
+                            Booking("You");
+                            break;
+                    }
                 }
             }
         }
