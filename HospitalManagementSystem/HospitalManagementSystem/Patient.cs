@@ -200,7 +200,7 @@ namespace HospitalManagementSystem
                             Console.WriteLine();
                             Console.WriteLine($"Invalid choice, press any key to try again");
                             Console.ReadKey();
-                            Booking("You");
+                            BookAppointment();
                             break;
                     }
                 }

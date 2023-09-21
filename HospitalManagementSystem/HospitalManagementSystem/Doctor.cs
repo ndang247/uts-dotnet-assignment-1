@@ -23,7 +23,7 @@
             Console.WriteLine();
 
             string[] labels = { "Name", "Email Address", "Phone", "Address" };
-            string headers = $"{labels[0],-20} | {labels[1],-20} | {labels[2],-20} | {labels[3],-20}";
+            string headers = $"{labels[0],-20} | {labels[1],-20} | {labels[2],-10} | {labels[3],-20}";
             // Divider matches the length of the headers
             string divider = new('─', headers.Length + 20);
             Console.WriteLine(headers);
@@ -194,12 +194,10 @@
                     }
                     else
                     {
-                        // throw new Exception("Patient not registered with you, press any key to return to menu");
                         Console.WriteLine();
-                        Console.WriteLine("Doctor | Patient | Description");
-                        Console.WriteLine("------------------------------");
-                        Console.ReadKey();
-                        Menu();
+                        string[] labels = { "Doctor", "Patient", "Description" };
+                        Utils.DisplayHeader(labels, "─");
+                        throw new Exception("Patient not registered with you, press any key to return to menu");
                     }
                 }
                 else
