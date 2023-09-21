@@ -20,12 +20,13 @@ namespace HospitalManagementSystem
         private void MyDetails()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|               My Details             |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│              My Details              │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
             Console.WriteLine($"{fullName}'s Details");
             Console.WriteLine();
@@ -37,17 +38,20 @@ namespace HospitalManagementSystem
         private void MyDoctor()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|               My Doctor              |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│               My Doctor              │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
             Console.WriteLine("Your doctor:");
             Console.WriteLine();
-            Console.WriteLine("Name | Email Address | Phone | Address");
-            Console.WriteLine("--------------------------------------");
+
+            string[] labels = { "Name", "Email Address", "Phone", "Address" };
+            Utils.DisplayHeader(labels, "─");
+
             if (File.Exists($"Patients\\RegisteredDoctors\\{id}.txt"))
             {
                 string[] registeredDoctors = File.ReadAllLines($"Patients\\RegisteredDoctors\\{id}.txt");
@@ -66,17 +70,20 @@ namespace HospitalManagementSystem
         private void MyAppointment()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|            My Appointment            |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│            My Appointment            │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
             Console.WriteLine($"Appointment for {fullName}");
             Console.WriteLine();
-            Console.WriteLine("Doctor | Patient | Description");
-            Console.WriteLine("------------------------------");
+
+            string[] labels = { "Doctor", "Patient", "Description" };
+            Utils.DisplayHeader(labels, "─");
+
             if (File.Exists($"Appointments\\Patients\\{id}.txt"))
             {
                 string[] lines = File.ReadAllLines($"Appointments\\Patients\\{id}.txt");
@@ -94,12 +101,13 @@ namespace HospitalManagementSystem
         private void BookAppointment()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|           Book Appointment           |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│            Book Appointment          │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
 
             Booking("You");
 
@@ -123,12 +131,12 @@ namespace HospitalManagementSystem
                 Console.Write("Description of the appointment: ");
                 string description = Console.ReadLine();
 
-                //if (string.IsNullOrEmpty(description))
-                //{
-                //    Console.WriteLine("Description cannot be empty, press any key to try again");
-                //    Console.ReadKey();
-                //    BookAppointment();
-                //}
+                if (string.IsNullOrEmpty(description))
+                {
+                    Console.WriteLine("Description cannot be empty, press any key to try again");
+                    Console.ReadKey();
+                    BookAppointment();
+                }
 
                 // Check if the patient already has an appointment with this doctor
                 if (File.Exists($"Appointments\\Patients\\{id}.txt"))
@@ -202,12 +210,13 @@ namespace HospitalManagementSystem
         public override void Menu()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|             Patient Menu             |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│             Patient Menu             │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
 
             Console.WriteLine($"Welcome to DOTNET Hospital Managment System {fullName}");
@@ -269,7 +278,7 @@ namespace HospitalManagementSystem
             string[] doctor = File.ReadAllLines($"Doctors\\{registeredDoctor[0]}.txt");
             string doctorName = doctor[0].Split(';')[2];
 
-            return $"{fullName} | {doctorName} | {email} | {phone} | {address}";
+            return $"{fullName,-20} | {doctorName,-20} | {email,-20} | {phone,-5} | {address,-20}";
         }
     }
 }

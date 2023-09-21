@@ -12,12 +12,13 @@ namespace HospitalManagementSystem
 
         public void LoginMenu()
         {
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|                LOGIN                 |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│                LOGIN                 │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
 
             Console.Write("ID: ");

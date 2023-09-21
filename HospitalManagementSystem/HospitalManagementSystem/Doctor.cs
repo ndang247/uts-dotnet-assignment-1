@@ -13,15 +13,22 @@
         private void MyDetails()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|              My Details              |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│              My Details              │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
-            Console.WriteLine("Name | Email Address | Phone | Address");
-            Console.WriteLine("--------------------------------------");
+
+            string[] labels = { "Name", "Email Address", "Phone", "Address" };
+            string headers = $"{labels[0],-20} | {labels[1],-20} | {labels[2],-20} | {labels[3],-20}";
+            // Divider matches the length of the headers
+            string divider = new('─', headers.Length + 20);
+            Console.WriteLine(headers);
+            Console.WriteLine(divider);
+
             Console.WriteLine(this);
             Console.ReadKey();
             Menu();
@@ -30,17 +37,19 @@
         private void MyPatients()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|              My Patients             |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│              My Patients             │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
             Console.WriteLine($"Patients assigned to {fullName}");
             Console.WriteLine();
-            Console.WriteLine("Name | Doctor | Email Address | Phone | Address");
-            Console.WriteLine("-----------------------------------------------");
+
+            string[] labels = { "Name", "Doctor", "Email Address", "Phone", "Address" };
+            Utils.DisplayHeader(labels, "─");
 
             if (File.Exists($"Doctors\\RegisteredPatients\\{id}.txt"))
             {
@@ -60,15 +69,18 @@
         private void ListAppointments()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|            All Appointments          |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│           All Appointments           │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
-            Console.WriteLine("Doctor | Patient | Description");
-            Console.WriteLine("------------------------------");
+
+            string[] labels = { "Doctor", "Patient", "Description" };
+            Utils.DisplayHeader(labels, "─");
+
             if (File.Exists($"Appointments\\Doctors\\{id}.txt"))
             {
                 string[] appointments = File.ReadAllLines($"Appointments\\Doctors\\{id}.txt");
@@ -86,12 +98,13 @@
         private void CheckParticularPatient()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|         Check Patient Details        |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│         Check Patient Details        │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
             Console.Write("Enter the ID of the patient to check: ");
             try
@@ -103,8 +116,10 @@
                     string[] patientInfo = patient[0].Split(';');
 
                     Console.WriteLine();
-                    Console.WriteLine("Patient | Doctor | Email Address | Phone | Address");
-                    Console.WriteLine("--------------------------------------------------");
+
+                    string[] labels = { "Patient", "Doctor", "Email Address", "Phone", "Address" };
+                    Utils.DisplayHeader(labels, "─");
+
                     Patient p = new Patient(patientInfo[0], patientInfo[1], patientInfo[2], patientInfo[3], patientInfo[4], patientInfo[5], "Patient");
                     Console.WriteLine(p);
 
@@ -139,12 +154,13 @@
         private void ListAppointmentsWithPatient()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|           Appointment With           |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│           Appointment With           │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
 
             Console.WriteLine();
             Console.Write("Enter the ID of the patient you would like to view appointments for: ");
@@ -159,8 +175,10 @@
                     if (id == registeredDoctor[0])
                     {
                         Console.WriteLine();
-                        Console.WriteLine("Doctor | Patient | Description");
-                        Console.WriteLine("------------------------------");
+
+                        string[] labels = { "Doctor", "Patient", "Description" };
+                        Utils.DisplayHeader(labels, "─");
+
                         if (File.Exists($"Appointments\\Patients\\{patientID}.txt"))
                         {
                             string[] appointments = File.ReadAllLines($"Appointments\\Patients\\{patientID}.txt");
@@ -218,12 +236,13 @@
         public override void Menu()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|              Doctor Menu             |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│              Doctor Menu             │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
 
             Console.WriteLine();
             Console.WriteLine($"Welcome to DOTNET Hospital Managment System {fullName}");
@@ -285,7 +304,7 @@
 
         public override string ToString()
         {
-            return $"{fullName} | {email} | {phone} | {address}";
+            return $"{fullName,-20} | {email,-20} | {phone,-5} | {address,-20}";
         }
     }
 }

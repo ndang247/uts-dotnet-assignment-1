@@ -42,7 +42,7 @@ namespace HospitalManagementSystem
             string[] patientInfo = File.ReadAllLines($"Patients\\{patientID}.txt");
             string patientName = patientInfo[0].Split(';')[2];
 
-            return $"{doctorName} | {patientName} | {description}";
+            return $"{doctorName,-20} | {patientName,-20} | {description,-20}";
         }
     }
 }

@@ -15,18 +15,20 @@ namespace HospitalManagementSystem
         private void ListAllDoctors()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|              All Doctors             |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│              All Doctors             │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
 
             Console.WriteLine("All doctors registered to the DOTNET Hospital Management System");
             Console.WriteLine();
-            Console.WriteLine("Name | Email Address | Phone | Address");
-            Console.WriteLine("--------------------------------------");
+
+            string[] labels = { "Name", "Email Address", "Phone", "Address" };
+            Utils.DisplayHeader(labels, "─");
 
             // Get all doctors
             string[] doctors = Directory.GetFiles("Doctors");
@@ -47,12 +49,13 @@ namespace HospitalManagementSystem
         private void CheckDoctorDetails()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|            Doctor Details            |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│             Doctor Details           │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
 
             Console.WriteLine("Please enter the ID of the doctor who's details you are checking. Or press n to return to menu");
@@ -82,8 +85,10 @@ namespace HospitalManagementSystem
                     Console.WriteLine();
                     Console.WriteLine($"Details for {d.fullName}");
                     Console.WriteLine();
-                    Console.WriteLine("Name | Email Address | Phone | Address");
-                    Console.WriteLine("--------------------------------------");
+
+                    string[] labels = { "Name", "Email Address", "Phone", "Address" };
+                    Utils.DisplayHeader(labels, "─");
+
                     Console.WriteLine(d);
 
                     Console.ReadKey();
@@ -117,18 +122,20 @@ namespace HospitalManagementSystem
         private void ListAllPatients()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|             All Patients             |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│              All Patients            │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
 
             Console.WriteLine("All patients registered to the DOTNET Hospital Management System");
             Console.WriteLine();
-            Console.WriteLine("Name | Doctor | Email Address | Phone | Address");
-            Console.WriteLine("-----------------------------------------------");
+
+            string[] labels = { "Name", "Doctor", "Email Address", "Phone", "Address" };
+            Utils.DisplayHeader(labels, "─");
 
             // Get all patients
             string[] patients = Directory.GetFiles("Patients");
@@ -150,12 +157,13 @@ namespace HospitalManagementSystem
         private void CheckPatientDetails()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|            Patient Details           |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│            Patient Details           │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
 
             Console.WriteLine("Please enter the ID of the patient who's details you are checking. Or press n to return to menu");
@@ -185,8 +193,10 @@ namespace HospitalManagementSystem
                     Console.WriteLine();
                     Console.WriteLine($"Details for {p.fullName}");
                     Console.WriteLine();
-                    Console.WriteLine("Patient | Doctor | Email Address | Phone | Address");
-                    Console.WriteLine("--------------------------------------------------");
+
+                    string[] labels = { "Name", "Doctor", "Email Address", "Phone", "Address" };
+                    Utils.DisplayHeader(labels, "─");
+
                     Console.WriteLine(p);
 
                     Console.ReadKey();
@@ -220,12 +230,13 @@ namespace HospitalManagementSystem
         private void AddDoctor()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|              Add Doctor              |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│              Add Doctor              │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
 
             Console.WriteLine("Registering a new doctor with the DOTNET Hospital Management System");
@@ -332,12 +343,13 @@ namespace HospitalManagementSystem
         private void AddPatient(string pID, string password, string firstName, string lastName, string emailAddress, string phoneNumber, string streetNumber, string street, string city, string state, string postcode)
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|              Add Patient             |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│              Add Patient             │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
             Console.WriteLine();
 
             Console.WriteLine("Registering a new patient with the DOTNET Hospital Management System");
@@ -446,12 +458,13 @@ namespace HospitalManagementSystem
         public override void Menu()
         {
             Console.Clear();
-            Console.WriteLine(" ______________________________________");
-            Console.WriteLine("|                                      |");
-            Console.WriteLine("|   DOTNET Hospital Managment System   |");
-            Console.WriteLine("|______________________________________|");
-            Console.WriteLine("|          Administrator Menu          |");
-            Console.WriteLine("|______________________________________|");
+            Console.WriteLine("┌──────────────────────────────────────┐");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("│   DOTNET Hospital Managment System   │");
+            Console.WriteLine("│──────────────────────────────────────│");
+            Console.WriteLine("│           Adminstrator Menu          │");
+            Console.WriteLine("│                                      │");
+            Console.WriteLine("└──────────────────────────────────────┘");
 
             Console.WriteLine();
             Console.WriteLine($"Welcome to DOTNET Hospital Managment System {fullName}");
